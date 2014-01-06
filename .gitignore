@@ -2,9 +2,12 @@
 .mtj.tmp/
 
 
+<<<<<<< HEAD
 ### SublimeText ###
 # SublimeText project files
 *.sublime-workspace
+=======
+>>>>>>> 5231d2fdaef7d23b40746b814fcd31e4dad5cbfd
 
 ### C++ ###
 # Compiled Object files
