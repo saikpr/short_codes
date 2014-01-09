@@ -16,6 +16,8 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
+#Windows
+*.ini
 
 # Compiled Static libraries
 *.lai

@@ -1,3 +1,7 @@
+/*Program to implement BFS algo
+Version 1.00 09-01-2014
+By swat
+*/
 import java.util.*;
 class queue
 {
