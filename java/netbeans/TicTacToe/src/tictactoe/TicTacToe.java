@@ -1,8 +1,11 @@
+/*By Sainyam Kapoor
+TictacToe Program!
+*/
+
 package tictactoe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
-
 import javax.swing.*;
 public class TicTacToe 
 {   
@@ -11,7 +14,7 @@ public class TicTacToe
     private static final int triggercheck()
     {  triger=triger+1;
        if(triger==9)
-           
+ 
        { JOptionPane.showMessageDialog(null,"Sorry Its A Draw!", ":( :( :("
               , JOptionPane.INFORMATION_MESSAGE);
       a[0][0]=-10;a[1][1]=-10;a[2][2]=-10;
@@ -19,7 +22,6 @@ public class TicTacToe
        }
        return triger;
     }
-    
     static String str1=new String();
     static String str2=new String();
     private static void createGUI() 
