@@ -1,25 +1,23 @@
 import os
-
 import hashlib
 hashdir = []
 def get_hash(name):
     readsize = 64*1024
     try:
         with open(name, 'r') as f:
-            
-            data = f.read(readsize)
-            f.seek(-readsize, os.SEEK_END)
-            data += f.read(readsize)
-            return hashlib.md5(data).hexdigest()
-    except IOError:
-        print "Error at" + name
+            if os.path.getsize(name) >readsize:
+                data=f.read(readsize)
+                f.seek(-readsize, os.SEEK_END)
+                data += f.read(readsize)
+                return hashlib.md5(data).hexdigest()
+            else:
+                return hashlib.md5(f.read()).hexdigest()
+    except IOError as errcode:
+        print str(errcode)
         return '-1'
-
-
 for dirname, dirnames, filenames in os.walk('.'):
     for filename in filenames:
-        address=os.path.join(dirname, filename)
-        
+        address=os.path.join(dirname, filename) 
         hashed=get_hash(address)
         if hashed == '-1':
             continue
@@ -28,4 +26,4 @@ for dirname, dirnames, filenames in os.walk('.'):
             print address
         else :
             hashdir.append(hashed)
-
+input_last=raw_input("Done!")
