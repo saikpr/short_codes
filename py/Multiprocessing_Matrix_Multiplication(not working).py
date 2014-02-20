@@ -1,10 +1,11 @@
 from __future__ import print_function
-import threading
 from time import time
 from random import randint
-class matrixThread(threading.Thread):
+import multiprocessing 
+
+class matrixProcess(multiprocessing.Process):
      def __init__(self,mat1,mat2,row,colm,size):
-         threading.Thread.__init__(self)
+         multiprocessing.Process.__init__(self)
          self.colm=colm
          self.row=row
          self.size=size
@@ -18,7 +19,7 @@ ans=raw_input("If you want to use random instead of entering(y or n) :")
 mat3 = [[0 for x in xrange(size)] for x in xrange(size)]
 mat4 = [[0 for x in xrange(size)] for x in xrange(size)]
 ans=ans.lower()
-if ans == 'y\r' or ans == 'yes\r':
+if ans == 'y' or ans == 'yes':
 	mini,maxi=raw_input("Enter the min and max value :").split()
 	maxi=int(maxi)
 	mini=int(mini)
@@ -38,13 +39,15 @@ for i in xrange(size):
 		mat2[i][j]=int(mat2[i][j])
 array = []
 for i in xrange(size*size):
-	array.append(matrixThread(mat1,mat2,int(i/size),i%size,size))
-threadingtime=time()
-for thread in array:
-	thread.start()
-	thread.join()
-	mat3[thread.row][thread.colm]=int(thread.sum)
-threadingtime=time()-threadingtime
+	array.append(matrixProcess(mat1,mat2,int(i/size),i%size,size))
+processingtime=time()
+
+for process in array:
+	process.start()
+for process in array:
+	process.join()  # This waits until the process has completed
+	mat3[process.row][process.colm]=int(process.sum)
+processingtime=time()-processingtime
 normaltime=time()
 for i in xrange(size):
 	for j in xrange(size):
@@ -53,17 +56,18 @@ for i in xrange(size):
 			var_sum+=mat1[k][j] * mat2[i][k]
 		mat4[i][j]=var_sum
 normaltime=time()-normaltime
-
-
-print('The Resultant matrix is(using threading)')
-for i in xrange(size):
-	for j in xrange(size):
-		print (mat3[i][j], end=" ")
-	print('')
-print('The Resultant matrix is(without threading)')
-for i in xrange(size):
-	for j in xrange(size):
-		print (mat4[i][j], end=" ")
-	print('')
-print("Time taken for processing with threads 	  :"+str(threadingtime))
-print("Time taken for processing without threads :"+str(normaltime))
+ans=raw_input("Want to print the resultant array :")
+ans=ans.lower()
+if ans=='y/r' or ans=='yes/r':
+	print('The Resultant matrix is(using processing)')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat3[i][j], end=" ")
+		print('')
+	print('The Resultant matrix is(without processing)')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat4[i][j], end=" ")
+		print('')
+print("Time taken for processing with processs 	  :"+str(processingtime))
+print("Time taken for processing without processs :"+str(normaltime))
