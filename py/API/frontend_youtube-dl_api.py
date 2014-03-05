@@ -86,4 +86,8 @@ def del_down(id1):
 def del_down(id1):
 	
 	os.system("rm -r /var/www/api/"+id1)
+@bottle.route('/dsdel/<id1>', method='GET')
+def del_down(id1):
+	
+	os.system("rm -r /var/www/api/"+id1)
 bottle.run(host='10.3.61.221',port=8080)
