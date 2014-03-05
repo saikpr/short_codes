@@ -24,6 +24,10 @@ def doit(event):
 	base_point =sorted_points[0]
 	make_polar_list(base_point)
 	covexhull(base_point)
+	sorted_points=sorted(final, key=itemgetter(1))
+	base_point =sorted_points[0]
+	make_polar_list(base_point)
+	covexhull(base_point)
 	draw_lines(final)
 def make_polar_list(a):
 	global point_angles
@@ -105,10 +109,11 @@ def covexhull(base):
 	a=stack1.pop()
 	a=a[0:2]
 	final.append(b)
-	final.append(base)
+	
 
 def draw_lines(fi):
-	
+	global base_point
+	#fi.append(base_point)
 	print fi
 	a=fi.pop()
 	b=fi.pop()
