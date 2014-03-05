@@ -80,7 +80,7 @@ def covexhull(base):
 		a=a[0:2]
 		final.append(a)
 		if getvectorproduct(a,b,c)==1:
-			final.append(b)
+			
 			stack1.append(b)
 			stack1.append(c)
 			try :
@@ -88,6 +88,7 @@ def covexhull(base):
 			except IndexError:
 				stack1.append(base)
 				trigger=False
+			final.append(b)
 		elif getvectorproduct(a,b,c)==-1:
 			stack1.append(a)
 
@@ -105,47 +106,7 @@ def covexhull(base):
 	a=a[0:2]
 	final.append(b)
 	final.append(base)
-def covex1(base):
-	stack1=[]
-	stack1.append(base)
-	
-	stack1.append(point_angles.pop())
-	stack1.append(point_angles.pop())
-	trigger=True
-	while(trigger==True):
-		c=stack1.pop()
-		c=c[0:2]
-		b=stack1.pop()
-		b=b[0:2]
-		a=stack1.pop()
-		a=a[0:2]
-		fim.append(a)
-		if getvectorproduct(a,b,c)==1:
-			fim.append(b)
-			stack1.append(b)
-			stack1.append(c)
-			try :
-				stack1.append(point_angles.pop())
-			except IndexError:
-				stack1.append(base)
-				trigger=False
-		elif getvectorproduct(a,b,c)==-1:
-			stack1.append(a)
-			
-			stack1.append(c)
-			try :
-				stack1.append(point_angles.pop())
-			except IndexError:
-				stack1.append(base)
-				trigger=False
-	c=stack1.pop()
-	c=c[0:2]
-	b=stack1.pop()
-	b=b[0:2]
-	a=stack1.pop()
-	a=a[0:2]
-	fim.append(b)
-	fim.append(base)
+
 def draw_lines(fi):
 	
 	print fi
