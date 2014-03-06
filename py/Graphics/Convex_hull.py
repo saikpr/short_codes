@@ -10,7 +10,7 @@ stack1=[]
 base_point=[]
 final=[]
 this_point=[]
-canvas = Tkinter.Canvas(root, bg="white", width=600, height=600)
+canvas = Tkinter.Canvas(root, bg="white", width=700, height=700)
 canvas.configure(cursor="crosshair")
 click=0
 point_angles=[]
@@ -73,10 +73,10 @@ def getvectorproduct(a,b,c):
 		return -1
 	elif d==0:
 		print "It happens"
-		return 0
+		return -1
 def covexhull(base):
 	global final
-	final.append(base)
+	final.append(base+[0])
 	a=point_angles.pop()
 	b=point_angles.pop()
 	final.append(a)
@@ -86,7 +86,7 @@ def covexhull(base):
 		c=final.pop()
 		b=final.pop()
 		a=final.pop()
-		if getvectorproduct(a,b,c)==1:
+		if getvectorproduct(a,b,c)==1 :
 			final.append(a)
 			final.append(b)
 			final.append(c)

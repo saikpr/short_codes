@@ -53,17 +53,28 @@ for i in xrange(size):
 			var_sum+=mat1[k][j] * mat2[i][k]
 		mat4[i][j]=var_sum
 normaltime=time()-normaltime
-
-
-print('The Resultant matrix is(using threading)')
-for i in xrange(size):
-	for j in xrange(size):
-		print (mat3[i][j], end=" ")
-	print('')
-print('The Resultant matrix is(without threading)')
-for i in xrange(size):
-	for j in xrange(size):
-		print (mat4[i][j], end=" ")
-	print('')
+inpu=str(raw_input("Do You want To print The matrices :"))
+ans=inpu.lower()
+if ans == 'y\r' or ans == 'yes\r':
+	inpu=print('Matrix1:')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat1[i][j], end=" ")
+		print('')
+	print('Matrix2:')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat2[i][j], end=" ")
+		print('')
+	print('The Resultant matrix is(using threading)')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat3[i][j], end=" ")
+		print('')
+	print('The Resultant matrix is(without threading)')
+	for i in xrange(size):
+		for j in xrange(size):
+			print (mat4[i][j], end=" ")
+		print('')
 print("Time taken for processing with threads 	  :"+str(threadingtime))
 print("Time taken for processing without threads :"+str(normaltime))
