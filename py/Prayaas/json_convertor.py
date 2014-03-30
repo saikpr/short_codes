@@ -1,4 +1,5 @@
 from time import time
+from hashlib import sha1
 i=0
 domain_dict={}
 with open('DomainMapping.csv','rb') as  fil:
@@ -8,6 +9,7 @@ with open('DomainMapping.csv','rb') as  fil:
 			domain_dict[int(a1)]=a2[0:-2]
 		i=i+1
 data_done=0
+data_done1=0
 contlist=[]
 dplist=[]
 tk=time()
@@ -17,6 +19,7 @@ fil=open('contestdata_0_json_'+str(filenumber)+'.txt','w')
 fil.write('[')
 def json_creator(contlist,data_done): #can be optimised later by copying it instead of calling it every time
 	stri= {}
+	stri['_id']=sha1(str(time())+str(contlist)).hexdigest()
 	i=0
 	while i<len(contlist):
 		if contlist[i]!='' and contlist[i] != '0' and contlist[i] != '0\r\n' and i!=5 and i!=6:
@@ -45,17 +48,21 @@ with open('contestdata_0.txt','rb') as f:
 			contlist=cont.split('\t')
 			if len(contlist)==9:
 				stri=json_creator(contlist,data_done)
-				if data_done==0:
+				if data_done1==0:
 					fil.write(str(stri)+'\n')
 				elif cont != '':
 					fil.write(','+str(stri)+'\n')
 				data_done+=1
-				if data_done%100000==0:
+				data_done1+=1
+				if data_done%5000==0:
+					fil.write(']')
 					fil.close()
 					filenumber+=1
 					fil=open('contestdata_0_json_'+str(filenumber)+'.txt','w')
-					print "time taken to update :" +str(data_done)+" in "+str(time()-lasttime)
+					fil.write('[')
+					print "time taken to update :" +str(data_done/5000)+" in "+str(time()-lasttime)
 					lasttime=time()
+					data_done1=0
 fil.write(']')
 tk=time()-tk
 print "total time taken to update "+str(data_done)+' in '+str(tk)
