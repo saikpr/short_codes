@@ -17,7 +17,7 @@ point_angles=[]
 def point(event):
 	global click
 	click+=1
-	canvas.create_oval(event.x, event.y, event.x+3, event.y+3, fill="black")
+	canvas.create_oval(event.x-1, event.y-1, event.x+1, event.y+1, fill="black")
 	if not [event.x,event.y] in points:
 		this_point=[event.x,-1*event.y]
 		points.append(this_point)
