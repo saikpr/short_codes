@@ -1,23 +1,18 @@
 from __future__ import division
-__author__ = 'Sainyam Kapoor <sainyamkapoor@yahoo.com'
+__author__ = 'Sainyam Kapoor <sainyamkapoor@yahoo.com>'
 __version__ = '0.1'
 import wx
-from math import * # So we can evaluate 'sqrt(8), sin()'
+from math import * # So we can evaluate 'sqrt(8), sin(),etc'
 class Calculator(wx.Frame):
    '''Main calculator Frame'''
    degorrad=False
    last=False
    def __init__(self):
-       title = 'Calculator version %s' % __version__
+       title = 'Calculator v'+__version__ +" by "+__author__
        window=wx.Frame.__init__(self, None, -1, title)
        sizer = wx.BoxSizer(wx.VERTICAL) # Main vertical sizer
        self.display = wx.ComboBox(self, -1) # Current calculation
-       sizer.Add(self.display, 0, wx.EXPAND) # Add to main sizer
-
-       # [7][8][9][/]
-       # [4][5][6][*]
-       # [1][2][3][-]
-       # [0][.][C][+]
+       sizer.Add(self.display, 0, wx.EXPAND) 
        gsizer = wx.GridSizer(6, 4)
        for row in (('7', '8', '9', '/'),
                    ('4', '5', '6', '*'),
@@ -65,7 +60,7 @@ class Calculator(wx.Frame):
                     compute=compute.replace('tan(',"tan((pi/180)*")
                     
                     
-               
+               #print compute
                result = round(eval(compute),10)
                compute.replace('sin((pi/180)*','sin(')  
                # Add to history
