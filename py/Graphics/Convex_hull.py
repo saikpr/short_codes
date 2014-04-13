@@ -128,8 +128,23 @@ def draw_lines(fi):
 		b=fi.pop()	
 	canvas.create_line(a[0],-1*a[1],b[0],-1*b[1])
 
-
-
+def clear_the_base(event):
+	canvas.delete('all')
+	global points
+	points = []
+	global stack1
+	stack1=[]
+	global base_point
+	base_point=[]
+	global final
+	final=[]
+	global this_point
+	this_point=[]	
+	global point_angles
+	point_angles=[]
+	global click
+	click=0
 canvas.bind("<Button-1>", point)
+canvas.bind("<Button-3>", clear_the_base)
 canvas.pack()
 root.mainloop()
