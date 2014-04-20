@@ -1,0 +1,63 @@
+
+
+\documentclass[12pt,a4paper]{report}
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+
+
+\usepackage{url} %for proper url entries
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Mini-Project}, pdfauthor={sainyam kapoor}, pdfsubject={4th sem mini project}, pdfkeywords={<keywords here>}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+%\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+
+\begin{document}
+\renewcommand\bibname{References} %Renames "Bibliography" to "References" on ref page
+
+%include other pages
+\input{./title.tex}
+%\input{./certificate.tex}
+%\input{./abstract.tex}
+
+\pagenumbering{roman} %numbering before main content starts
+\tableofcontents
+%\listoffigures
+
+%\newpage
+\pagenumbering{arabic} %reset numbering to normal for the main content
+
+%\input{./prob-definition.tex} %objective changed to problem definition
+\input{./introduction.tex} %literature survey included in this
+\input{./Background.tex}
+\input{./work-done.tex}
+\input{./code.tex}
+\input{./result.tex}
+\input{./issue.tex}
+\input{./application.tex}
+\input{./future.tex}
+\input{./conclusion.tex}
+%\input{./acknow.tex}
+\input{./ref.tex}
+
+\end{document}

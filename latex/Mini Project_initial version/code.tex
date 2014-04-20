@@ -1,0 +1,143 @@
+\chapter{Code}
+\begin{lstlisting}
+
+import os
+import sys
+import stat
+import md5
+import wx
+
+filesBySize={}      
+# creating a dictionary to store files by size
+
+def runp(event):
+    global filesBySize
+    filesBySize={} 
+
+    def walker(arg, dirname, fnames):     
+    # Funtion to traverse the directories
+        
+        d = os.getcwd()
+        print d
+        print dirname
+        os.chdir(dirname)
+        try:
+            fnames.remove('Thumbs')
+        except ValueError:
+            pass        
+        for fil in fnames:
+            if not os.path.isfile(fil):
+                continue
+            size = os.stat(fil)[stat.ST_SIZE]
+            if size < 100:
+                continue
+           
+            if arg.has_key(size):
+                a = arg[size]
+            else:
+                a = []
+            
+                arg[size] =a
+            a.append(os.path.join(dirname, fil))
+        os.chdir(d)
+
+      
+    x=content1.GetValue()
+    print 'Scanning directory for same file size  "%s"....' % x
+    os.path.walk(x, walker, filesBySize)    
+
+    print 'Finding potential dupes...'
+    potentialDupes = []
+    potentialCount = 0
+    trutyp = type(True)
+    sizes = filesBySize.keys()
+    sizes.sort()                                         
+    #Sorting by file size
+    for k in sizes:
+        infil = filesBySize[k]
+        outFiles = []
+        hashes = {}
+        if len(infil) is 1: continue
+        print 'Testing %d files of size %d...' % (len(infil), k)
+        for filnam in infil:                           
+        # Hashing the first 2048 bytes of data
+            if not os.path.isfile(filnam):
+                continue
+            dfile = file(filnam, 'rb')
+            hasher = md5.new(dfile.read(2048))
+            hashValue = hasher.digest()
+            if hashes.has_key(hashValue):
+                x = hashes[hashValue]
+                if type(x) is not trutyp:
+                    outFiles.append(hashes[hashValue])
+                    hashes[hashValue] = True
+                outFiles.append(filnam)
+            else:
+                hashes[hashValue] = filnam
+            dfile.close()
+        if len(outFiles):
+            potentialDupes.append(outFiles)
+            potentialCount = potentialCount + len(outFiles)
+    del filesBySize
+
+    print 'Found %d sets of potential duplicates...' % potentialCount
+    print 'Scanning for real duplicates...'
+
+    dupes = []
+    for aSet in potentialDupes:
+        outFiles = []
+        hashes = {}
+        for filnam in aSet:                           
+        # Checking Whole file by hashing 4096 bytes each time from 
+            print 'Scanning file "%s"...' % filnam    
+            # list of suspected duplicate files
+            dfile = file(filnam, 'rb')
+            hasher = md5.new()
+            while True:
+                r = dfile.read(4096)
+                if not len(r):
+                    break
+                hasher.update(r)
+            dfile.close()
+            hashValue = hasher.digest()
+            if hashes.has_key(hashValue):
+                if not len(outFiles):
+                    outFiles.append(hashes[hashValue])
+                outFiles.append(filnam)
+            else:
+                hashes[hashValue] = filnam
+        if len(outFiles):
+            dupes.append(outFiles)
+
+    i = 0
+    for d in dupes:
+        print 'Original is %s' % d[0]
+        for fi in d[1:]:
+            i = i + 1
+            print 'Deleting %s' % fi
+            os.remove(fi)
+        print
+app=wx.App()                                    
+# Creating GUI for the program using wxPython
+win=wx.Frame(None,title="File Remover",size=(300,80))
+bkg=wx.Panel(win)
+remv=wx.Button(bkg, label="remove")
+remv.SetBackgroundColour('blue')
+remv.Bind(wx.EVT_BUTTON, runp)
+
+content1= wx.TextCtrl(bkg)
+hbox=wx.BoxSizer()
+hbox.Add(content1,proportion=1,flag=wx.EXPAND ,border=5)
+hbox.Add(remv,proportion=0,flag=wx.EXPAND ,border=5)
+bkg.SetSizer(hbox)
+win.Show()
+app.MainLoop()
+
+\end{lstlisting}
+\vspace{3.5in}
+ \textbf {Note :}
+This Code has been Writtten in Python 2.7.6.
+In this the Bug related with the file-opening parameter was fixed by using `rb' mode instead of `r' mode.
+
+Also ,
+It uses os.path.walk, which is to be deprecated in new versions nad replaced by os.walk.

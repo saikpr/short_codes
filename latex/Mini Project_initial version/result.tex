@@ -1,0 +1,13 @@
+\chapter{Result}
+
+To test the program we input a directory containing a mixture of files including duplicates and subdirectories which also contain duplicates and originals.\\~\\
+An experiment was carried out with following specifications:-
+\\350 media files including images and mp3 audios were obtained from various sources(web, offline). 
+\\They were put together in multiple sub directories in a root directory which was the input to our program. 
+\\~\\A particular subdirectory was copied again in the root directory and the python script was run on this sub directory which based on some random data such as execution time, epoch time, file size and file name created a random name of size 12 character and renamed the file to this string. 
+\\~\\Another sub directory was created in the root directory which contained multiple instances of the same data and the files in the root directory was sorted on basis of size and creation date and then named accordingly.
+\\~\\
+\\~\\The size of total unique data in root directory was initially: 3.7GB
+\\~\\After duplicating the data , the total size of file in root directory: 11.4GB
+\\~\\Time take by the program to remove all the duplicated files: ~ 143s
+\\~\\Size of the root directory after the program was run: 3.7GB
