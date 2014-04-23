@@ -3,12 +3,14 @@ import bottle
 from bottle import route, run, request, abort
 import pymongo
  
-connection_string="mongodb://a.skxdx.tk"
+connection_string="mongodb://127.0.0.1"
 connection=pymongo.MongoClient(connection_string)
 db = connection.names
-@route('/new', method='PUT')
+@route('/new', method='POST')
 def put_doc():
     data = request.body.readline()
+    print data
+    print type(data)
     if not data:
         abort(400, 'No data received')
     entity = json.loads(data)
@@ -30,4 +32,4 @@ def get_document(id):
         abort(404, 'No document with id %s' % id)
     return entity
  
-run(host='localhost',port=8080)
+run(host='localhost',port=8018)
