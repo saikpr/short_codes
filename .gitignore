@@ -125,3 +125,5 @@ nosetests.xml
 *.vrb
 *.xdy
 *.tdo
+*.pdf
+Presentation/Cse-4thSem-Programming language/IITBHU_Logo_Matlab.png
