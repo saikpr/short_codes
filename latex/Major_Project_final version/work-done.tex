@@ -1,0 +1,11 @@
+\chapter{Building a Simple Cluster}
+
+ Let's walk through the process of building a simple 4-node cluster out of some existing workstations, assuming that they are nearly identical and located in the same room.
+\\~\\
+The first step is to tightly couple them together. The typical workstation is probably connected to the network through an Ethernet connection to a hub or switch in the room. The minimum configuration that it is recommended to use Gigabit Ethernet. 
+\\~\\
+Now that the hardware is in place, the system may need to be adapted. If there is no common home directory across the nodes, you will need to set one up. This again will require root access, and may differ between operating systems. Basically, create a directory such as /cluster on each machine. Choose one machine to be the master node, and export this subdirectory to the others using the /etc/exports file. On the other nodes, mount the /cluster subdirectory using the /etc/fstab file.
+\\~\\
+All machines must trust each other enough to allow users to ssh between them without requiring a password. To test this, simply try `ssh <ipadress>' for example, and you should log into node1 without being prompted for a password. If not, use man rsh or man ssh to determine the next course of action. You may just need to create a .rhosts file, or the appropriate ssh keys. If your machines are not set up to trust each other, you will need to convince the system administrator to change this. 
+
+
