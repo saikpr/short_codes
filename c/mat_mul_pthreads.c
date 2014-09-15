@@ -32,7 +32,7 @@ int main()
 	scanf("%d",&n);
 	
 	printf("\nEnter the First Matrix");
-	
+	/*
 	for (i=0;i<n;i++)
 		for (j=0;j<n;j++)
 		{
@@ -45,9 +45,9 @@ int main()
 		{
 			scanf("%d",&b[i][j]);
 		}
+	*/
 	
-	
-	/* //Random Numbers
+	 //Random Numbers
 	for (i=0;i<n;i++)
 		for (j=0;j<n;j++)
 		{
@@ -55,7 +55,7 @@ int main()
 			b[i][j]=rand() % 20000;
 			c[i][j]=0;
 		}
-	*/
+	
 	
 	for (threadcount=1;threadcount<=threadmaxcount;threadcount++)
 	{	gpvar=(n*n)/(float)threadcount;
