@@ -40,7 +40,6 @@
 
 # Executables
 *.exe
-*.out
 *.app
 
 ### Python ###
@@ -116,7 +115,6 @@ nosetests.xml
 *.mtc0
 *.nav
 *.nlo
-*.out
 *.pdfsync
 *.ps
 *.snm
