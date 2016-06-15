@@ -12,7 +12,7 @@
 *.slo
 *.lo
 *.o
-
+*.stackdump
 # Compiled Dynamic libraries
 *.so
 *.dylib
