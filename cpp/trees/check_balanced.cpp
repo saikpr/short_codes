@@ -1,6 +1,6 @@
 /*input
 10
-1 2 3 4 5 6 7 -1 9 10
+1 2 3 4 5 -1 -1 -1 9 10
 */
 #include <iostream>
 #include <stack>
@@ -24,7 +24,6 @@ struct treeNode
 	}
 
 };
-
 template <class T>
 void array_to_tree(treeNode<T>* &root,T *arr, int l, int r)
 {
@@ -40,6 +39,21 @@ void array_to_tree(treeNode<T>* &root,T *arr, int l, int r)
 	return;
 
 };
+bool finished = false;
+template <class T>
+int height ( treeNode <T>* &root)
+{
+	if (root==NULL)
+		return 0;
+	 int ht1 = height(root->left),ht2 =height(root->right);
+	 if (max(ht1,ht2)-min(ht1,ht2)>1)
+	 	finished = true;
+	 return max(ht1,ht2)+1;
+}
+
+
+
+
 template <class T>
 void postorder (treeNode<T>* &tree)
 {	if(tree !=NULL)
@@ -52,26 +66,7 @@ void postorder (treeNode<T>* &tree)
 	}
 }
 
-template <class T>
-void print_kth_distance (treeNode<T>* &root, int k )
-{
-	queue<pair<treeNode<T>*,int> >  q1;
-	if (root==NULL)
-		return;
-	q1.push(make_pair(root,0));
-	pair <treeNode<T>*,int> temp;
-	while(!q1.empty())
-	{
-		temp = q1.front();
-		q1.pop();
-		if (temp.second == k)
-			cout<<temp.first->element<<" ";
-		if (temp.first->left)
-			q1.push(make_pair(temp.first->left,temp.second+1));
-		if (temp.first->right)
-			q1.push(make_pair(temp.first->right,temp.second+1));
-	}
-}
+
 
 int main()
 {
@@ -85,5 +80,7 @@ int main()
 		cin>>arr_tree[i];
 	}
 	array_to_tree<int>(root1,arr_tree,0,n-1);
-	print_kth_distance(root1,3);
+	cout<<height(root1);
+	if(finished == true)
+		cout<<"Unbalanced";
 }
