@@ -11,13 +11,7 @@
 #include <unordered_map>
 #define MAXN 100
 using namespace std;
-bool check_symmetry(vector<vector <bool> > &v1, int max_queens)
-{	int reverse = max_queens;
-	for (size_t i = 0;i<max_queens/2;i++)
-	{
-		
-	}
-}
+
 void print_board (vector<vector <bool> > &v1)
 {	
 	int max_queens = v1.size();
