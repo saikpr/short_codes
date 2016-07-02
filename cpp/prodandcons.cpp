@@ -1,10 +1,10 @@
 #include <iostream>
 #include <pthread.h>
 #define MAX 5
-#define MAXW 100
+#define MAXW 10
 using namespace std;
 int que[MAX];
-int front,end,len;
+int front,end_val,len;
 pthread_cond_t cond;
 pthread_mutex_t mut;
 
@@ -13,7 +13,7 @@ void *consumer (void *data);
 
 int main ()
 {	front=0;
-	end=0;
+	end_val=0;
 	len=0;
 	pthread_t t1,t2;
 	int it1,it2,*data;
@@ -42,9 +42,9 @@ void *producer (void *data)
 			pthread_cond_wait(&cond,&mut);
 
 		}
-		que[end]=i;
+		que[end_val]=i;
 		cout<<"Produced :"<<i<<endl;
-		end = (end +1 )%MAX;
+		end_val = (end_val +1 )%MAX;
 		len++;
 		pthread_mutex_unlock(&mut);
 
