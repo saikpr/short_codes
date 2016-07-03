@@ -1,4 +1,4 @@
 MyC
 ===
 
-Contains My Random Code and other things
+Contains Random Code and other things
