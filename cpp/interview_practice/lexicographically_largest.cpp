@@ -1,6 +1,5 @@
 /*input
-00001
-00010
+1234
 */
 #include <algorithm>
 #include <iostream>
@@ -30,7 +29,7 @@ string next_largest(string &str)
 	int n= str.size();
 	string new_str;
 	int max_i = -1, max_j = -1;
-	for (size_t i = 0 ; i< n ; i++)
+	for (size_t i = 0 ; i< n-1 ; i++)
 	{
 		if(str[i]<str[i+1])
 			max_i = i;
@@ -52,10 +51,12 @@ string next_largest(string &str)
 
 int main()
 {	
-	cout<<test_func<string>(next_largest);
-	// string str;
-	// cin>>str;
-	// do{
-	// cout<<str<<endl;}
-	// while(!(str = next_largest(str)).empty());
+	// bool k;
+	// while(cout<<test_func<string>(next_largest))
+	// {}
+	string str;
+	cin>>str;
+	do{
+	cout<<str<<endl;}
+	while(!(str = next_largest(str)).empty());
 }

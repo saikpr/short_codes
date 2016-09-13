@@ -1,5 +1,5 @@
 /*input
-8
+9
 */
 #include <iostream>
 #include <stack>
@@ -12,24 +12,28 @@
 #define MAXN 100
 using namespace std;
 
-void print_board (vector<vector <bool> > &v1)
+vector<string> print_board (vector<vector <bool> > &v1)
 {	
 	int max_queens = v1.size();
+	vector<string> to_return;
 	for (size_t i =0; i <max_queens;i++)
 	{
+		string temp;
 		for (size_t j =0; j <max_queens;j++)
 		{
 			if (v1[i][j])
 			{
-				cout<<"Q ";
+				temp+="Q";
 			}
 			else
 			{
-				cout<<"- ";
+				temp+=".";
+
 			}
 		}	
-		cout<<endl;
+		to_return.push_back(temp);
 	}
+	return to_return;
 }
 
 bool check_validpos(vector<vector <bool> > &v1, int row , int colm,int max_queens)
@@ -68,14 +72,17 @@ bool check_validpos(vector<vector <bool> > &v1, int row , int colm,int max_queen
 	return true;
 }
 
-bool nqueens (vector<vector <bool> > &v1, int queens_done, int &max_queens)
+bool nqueens (vector<vector <bool> > &v1, int queens_done, int &max_queens,vector<vector<string> > &to_return_final)
 {	
 
 	if (max_queens == queens_done)
 	{
-		cout<<"Done"<<endl;
+		// cout<<"Done"<<endl;
 		// return true;
-		print_board(v1);
+		vector<string> t = print_board(v1);
+		to_return_final.push_back(t);
+		// return true;
+		
 	}
 	else
 	{
@@ -91,7 +98,8 @@ bool nqueens (vector<vector <bool> > &v1, int queens_done, int &max_queens)
 			{	
 				// cout<<"Putting Queen at"<<queens_done<<i<<endl;
 				v1[queens_done][i]=true;
-				bool flag = nqueens(v1,queens_done+1,max_queens);
+				bool flag = nqueens(v1,queens_done+1,max_queens,to_return_final);
+				// cout<<flag<<endl;
 				if (flag == false)
 				{
 					v1[queens_done][i] = false;
@@ -103,16 +111,26 @@ bool nqueens (vector<vector <bool> > &v1, int queens_done, int &max_queens)
 				}
 			}
 		}
+		return false;
 	}
 }
 
 
 int main()
 {
-	int max_queens;
-	cin>>max_queens;
+	int max_queens=9;
+	// cin>>max_queens;
 	vector<vector <bool> > v1(max_queens,vector<bool>(max_queens,false));
-	bool exist = nqueens(v1,0,max_queens);
+	vector<vector<string> > to_return_final;
+	bool exist = nqueens(v1,0,max_queens,to_return_final);
+	for(size_t i = 0 ; i<to_return_final.size();i++)
+	{
+		for(size_t j = 0 ; j < to_return_final[i].size();j++)
+		{
+			cout<<to_return_final[i][j]<<endl;
+		}
+		cout<<"Done"<<endl;
+	}
 	// if (exist ==false)
 	// {
 	// 	cout<<"No Solution";

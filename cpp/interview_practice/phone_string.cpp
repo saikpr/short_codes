@@ -1,5 +1,5 @@
 /*input
-9944867152
+23
 */
 #include <iostream>
 #include <algorithm>
