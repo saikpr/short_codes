@@ -42,10 +42,11 @@ template <class T>
 void postorder (treeNode<T>* &tree)
 {	if(tree !=NULL)
 {
-	cout<<tree->element;
+	
 	postorder((tree)->left);
 
 	postorder((tree)->right);
+	cout<<tree->element;
 	
 }
 }
